@@ -26,14 +26,43 @@ The objective is to compare velocity profiles, turbulent quantities, and stress 
 
 ## 📘 Scientific Background
 
-### **Turbulent kinetic energy (TKE)**
+### Turbulent kinetic energy (TKE)
+
 The velocity is decomposed as:
+
 $$
 u_i = \bar{u}_i + u'_i
 $$
+
 The mean kinetic energy becomes:
+
 $$
 \bar{e}_c = \frac{1}{2}(\bar{u}_i^2 + \overline{u'_i u'_i})
+$$
+
+
+### RANS equations
+
+Starting with incompressible Navier–Stokes:
+
+$$
+\frac{\partial u_i}{\partial x_i} = 0
+$$
+
+$$
+\frac{\partial u_i}{\partial t} + u_j\frac{\partial u_i}{\partial x_j}
+= -\frac{1}{\rho}\frac{\partial p}{\partial x_i}
++ \nu \frac{\partial^2 u_i}{\partial x_j^2}
+$$
+
+
+Reynolds decomposition yields:
+
+$$
+\bar{u}_j \frac{\partial \bar{u}_i}{\partial x_j}
+= -\frac{1}{\rho} \frac{\partial \bar{p}}{\partial x_i}
++ \nu \nabla^2 \bar{u}_i
+- \frac{\partial \overline{u'_i u'_j}}{\partial x_j}
 $$
 
 ### **RANS equations**
