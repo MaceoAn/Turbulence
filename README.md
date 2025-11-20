@@ -55,7 +55,6 @@ $$
 + \nu \frac{\partial^2 u_i}{\partial x_j^2}
 $$
 
-
 Reynolds decomposition yields:
 
 $$
@@ -69,14 +68,17 @@ $$
 The Reynolds stress tensor introduces 6 new unknowns → turbulence models required.
 
 ### **Mixing-length model**
+
 $$
 \nu_t = l_m^2 \left|\frac{\partial \bar{u}}{\partial y}\right|
 $$
+
 $$
 l_m = \kappa y
 $$
 
 ### **k–ε model**
+
 $$
 \nu_t = C_\mu \frac{k^2}{\varepsilon}
 $$
@@ -88,22 +90,26 @@ $$
 Using the dataset `LM_Channel_5200_prof.txt`, we compute:
 
 ### ✔ Friction velocity  
+
 $$
 u_\tau = 0.78 \,\text{m/s}
 $$
 
 ### ✔ Velocity profile  
 Follows the expected log-law:
+
 $$
 \frac{\bar{u}}{u_\tau} = \frac{1}{\kappa} \ln\left( \frac{y}{l_\tau} \right) + B
 $$
 
 ### ✔ Turbulence production
+
 $$
 P = - \overline{u'_x u'_y} \frac{\partial \bar{u}}{\partial y}
 $$
 
 ### ✔ Dissipation
+
 $$
 \varepsilon = 2\nu S'_{ij} S'_{ij}
 $$
