@@ -30,58 +30,45 @@ The objective is to compare velocity profiles, turbulent quantities, and stress 
 
 The velocity is decomposed as:
 
-$$
-u_i = \bar{u}_i + u'_i
-$$
+$$ u_i = \bar{u}_i + u'_i $$
 
 The mean kinetic energy becomes:
 
-$$
-\bar{e}_c = \frac{1}{2}(\bar{u}_i^2 + \overline{u'_i u'_i})
-$$
+$$ \bar{e}_c = \frac{1}{2}(\bar{u}_i^2 + \overline{u'_i u'_i}) $$
 
+---
 
 ### RANS equations
 
 Starting with incompressible Navier–Stokes:
 
-$$
-\frac{\partial u_i}{\partial x_i} = 0
-$$
+$$ \frac{\partial u_i}{\partial x_i} = 0 $$
 
-$$
-\frac{\partial u_i}{\partial t} + u_j\frac{\partial u_i}{\partial x_j}
-= -\frac{1}{\rho}\frac{\partial p}{\partial x_i}
-+ \nu \frac{\partial^2 u_i}{\partial x_j^2}
-$$
+$$ \frac{\partial u_i}{\partial t} + u_j \frac{\partial u_i}{\partial x_j} = -\frac{1}{\rho}\frac{\partial p}{\partial x_i} + \nu \frac{\partial^2 u_i}{\partial x_j^2} $$
 
 Reynolds decomposition yields:
 
-$$
-\bar{u}_j \frac{\partial \bar{u}_i}{\partial x_j}
-= -\frac{1}{\rho} \frac{\partial \bar{p}}{\partial x_i}
-+ \nu \nabla^2 \bar{u}_i
-- \frac{\partial \overline{u'_i u'_j}}{\partial x_j}
-$$
+$$ \bar{u}_j \frac{\partial \bar{u}_i}{\partial x_j} = -\frac{1}{\rho} \frac{\partial \bar{p}}{\partial x_i} + \nu \nabla^2 \bar{u}_i - \frac{\partial \overline{u'_i u'_j}}{\partial x_j} $$
 
-### **Closure problem**
+---
+
+### Closure problem
+
 The Reynolds stress tensor introduces 6 new unknowns → turbulence models required.
 
-### **Mixing-length model**
+---
 
-$$
-\nu_t = l_m^2 \left|\frac{\partial \bar{u}}{\partial y}\right|
-$$
+### Mixing-length model
 
-$$
-l_m = \kappa y
-$$
+$$ \nu_t = l_m^2 \left|\frac{\partial \bar{u}}{\partial y}\right| $$
 
-### **k–ε model**
+$$ l_m = \kappa y $$
 
-$$
-\nu_t = C_\mu \frac{k^2}{\varepsilon}
-$$
+---
+
+### k–ε model
+
+$$ \nu_t = C_\mu \frac{k^2}{\varepsilon} $$
 
 ---
 
@@ -89,30 +76,22 @@ $$
 
 Using the dataset `LM_Channel_5200_prof.txt`, we compute:
 
-### ✔ Friction velocity  
+### ✔ Friction velocity
 
-$$
-u_\tau = 0.78 \,\text{m/s}
-$$
+$$ u_\tau = 0.78 \,\text{m/s} $$
 
 ### ✔ Velocity profile  
 Follows the expected log-law:
 
-$$
-\frac{\bar{u}}{u_\tau} = \frac{1}{\kappa} \ln\left( \frac{y}{l_\tau} \right) + B
-$$
+$$ \frac{\bar{u}}{u_\tau} = \frac{1}{\kappa} \ln\left( \frac{y}{l_\tau} \right) + B $$
 
 ### ✔ Turbulence production
 
-$$
-P = - \overline{u'_x u'_y} \frac{\partial \bar{u}}{\partial y}
-$$
+$$ P = - \overline{u'_x u'_y} \frac{\partial \bar{u}}{\partial y} $$
 
 ### ✔ Dissipation
 
-$$
-\varepsilon = 2\nu S'_{ij} S'_{ij}
-$$
+$$ \varepsilon = 2\nu S'_{ij} S'_{ij} $$
 
 Figures (DNS):
 
