@@ -1,184 +1,143 @@
-Turbulent Channel Flow — DNS vs RANS Comparative Study
+# Turbulent Channel Flow — DNS vs RANS Study
 
-A detailed analysis of turbulent channel flow using three modelling approaches:
-	•	DNS (Direct Numerical Simulation) — reference dataset at $Re_\tau = 5200$
-	•	RANS (k–ε model) — solved with ANSYS Fluent
-	•	Mixing-length theory — classical Prandtl model
+This project analyses the turbulent flow between two parallel plates using three approaches:
 
-The goal is to quantitatively compare velocity profiles, Reynolds stresses, turbulence production, and dissipation, in order to evaluate the strengths and limitations of turbulence models.
+- **DNS (Direct Numerical Simulation)** using reference data at $Re_\tau = 5200$  
+- **RANS (Reynolds-Averaged Navier–Stokes)** with the **k–ε model** using ANSYS Fluent  
+- **Mixing-length model** (Prandtl, 1925) for theoretical comparison
 
-⸻
+The objective is to compare velocity profiles, turbulent quantities, and stress distributions between the three approaches, and assess the performance and limitations of turbulence models.
 
-📑 Table of Contents
-	•	Objectives￼
-	•	Scientific Background￼
-	•	TKE￼
-	•	RANS equations￼
-	•	Closure problem￼
-	•	Mixing-length model￼
-	•	k–ε model￼
-	•	DNS Analysis￼
-	•	RANS Simulation￼
-	•	DNS vs RANS Comparison￼
-	•	Repository Structure￼
+---
 
-⸻
+## 🎯 Objectives
 
-🎯 Objectives
-	•	Understand turbulent channel flow fundamentals
-	•	Use DNS data to compute:
-	•	mean velocity profile
-	•	Reynolds stresses
-	•	turbulence production $P$
-	•	dissipation rate $\varepsilon$
-	•	Implement the Prandtl mixing-length model
-	•	Perform a k–ε RANS simulation
-	•	Compare DNS, RANS, and theoretical predictions
+- Understand the fundamentals of turbulent channel flows  
+- Use DNS data as a reference to compute:
+  - velocity profile  
+  - Reynolds stresses  
+  - turbulence production $P$  
+  - dissipation rate $\varepsilon$
+- Implement the **Prandtl mixing-length model**
+- Run a **k–ε RANS simulation** on Fluent
+- Compare DNS / RANS / theoretical profiles
 
-⸻
+---
 
-📘 Scientific Background
+## 📘 Scientific Background
 
-Turbulent kinetic energy (TKE)
-
-Velocity decomposition:
-
+### **Turbulent kinetic energy (TKE)**
+The velocity is decomposed as:
 $$
-u_i = \bar{u}_i + u’_i
+u_i = \bar{u}_i + u'_i
+$$
+The mean kinetic energy becomes:
+$$
+\bar{e}_c = \frac{1}{2}(\bar{u}_i^2 + \overline{u'_i u'_i})
 $$
 
-Mean kinetic energy:
-
-$$
-\bar{e}_c = \tfrac{1}{2}\big(\bar{u}_i^2 + \overline{u’_i u’_i}\big)
-$$
-
-⸻
-
-RANS equations
-
-Incompressible continuity:
-
+### **RANS equations**
+Starting with incompressible Navier–Stokes:
 $$
 \frac{\partial u_i}{\partial x_i} = 0
 $$
-
-Momentum:
-
 $$
-\frac{\partial u_i}{\partial t}
-	•	u_j \frac{\partial u_i}{\partial x_j}
-= -\frac{1}{\rho}\frac{\partial p}{\partial x_i}
-	•	\nu \frac{\partial^2 u_i}{\partial x_j^2}
+\frac{\partial u_i}{\partial t} + u_j\frac{\partial u_i}{\partial x_j}
+= -\frac{1}{\rho}\frac{\partial p}{\partial x_i} + \nu \frac{\partial^2 u_i}{\partial x_j^2}
 $$
 
-Reynolds-averaged form:
-
+Reynolds decomposition yields:
 $$
 \bar{u}_j \frac{\partial \bar{u}_i}{\partial x_j}
 = -\frac{1}{\rho} \frac{\partial \bar{p}}{\partial x_i}
-	•	\nu \nabla^2 \bar{u}_i
-
-	•	\frac{\partial \overline{u’_i u’_j}}{\partial x_j}
++ \nu \nabla^2 \bar{u}_i - 
+\frac{\partial \overline{u'_i u'_j}}{\partial x_j}
 $$
 
-⸻
+### **Closure problem**
+The Reynolds stress tensor introduces 6 new unknowns → turbulence models required.
 
-Closure problem
-
-The Reynolds stress tensor introduces 6 unknowns, requiring a turbulence model.
-
-⸻
-
-Mixing-length model
-
+### **Mixing-length model**
 $$
-\nu_t = l_m^2 \left| \frac{\partial \bar{u}}{\partial y} \right|
+\nu_t = l_m^2 \left|\frac{\partial \bar{u}}{\partial y}\right|
 $$
-
 $$
 l_m = \kappa y
 $$
 
-⸻
-
-k–ε model
-
+### **k–ε model**
 $$
 \nu_t = C_\mu \frac{k^2}{\varepsilon}
 $$
 
-⸻
+---
 
-🧪 DNS Analysis
+## 🧪 DNS Analysis
 
-Dataset used: LM_Channel_5200_prof.txt
+Using the dataset `LM_Channel_5200_prof.txt`, we compute:
 
-Friction velocity
-
+### ✔ Friction velocity  
 $$
-u_\tau = 0.78 , \text{m/s}
-$$
-
-Mean velocity profile
-
-Expected logarithmic law:
-
-$$
-\frac{\bar{u}}{u_\tau}
-= \frac{1}{\kappa} \ln\left(\frac{y}{l_\tau}\right) + B
+u_\tau = 0.78 \,\text{m/s}
 $$
 
-Turbulence production
-
+### ✔ Velocity profile  
+Follows the expected log-law:
 $$
-P = -\overline{u’_x u’_y} , \frac{\partial \bar{u}}{\partial y}
-$$
-
-Dissipation
-
-$$
-\varepsilon = 2\nu S’{ij} S’{ij}
+\frac{\bar{u}}{u_\tau} = \frac{1}{\kappa} \ln\left( \frac{y}{l_\tau} \right) + B
 $$
 
-Figures include:
-	•	Velocity profile
-	•	TKE production
-	•	TKE dissipation
+### ✔ Turbulence production
+$$
+P = - \overline{u'_x u'_y} \frac{\partial \bar{u}}{\partial y}
+$$
 
-⸻
+### ✔ Dissipation
+$$
+\varepsilon = 2\nu S'_{ij} S'_{ij}
+$$
 
-🛠️ RANS Simulation (k–ε)
+Figures (DNS):
 
-Simulation performed in ANSYS Fluent:
-	•	Incompressible, fully developed channel flow
-	•	2D statistically steady model
-	•	No-slip walls
-	•	Symmetry at centerline
-	•	Normalization with $u_\tau$ and $h$
+- velocity profile  
+- production of TKE  
+- dissipation of TKE  
 
-Validation:
-	•	residual convergence
-	•	shear stress integral check
-	•	verification of fully developed region
+---
+
+## 🛠️ RANS Simulation (k–ε)
+
+Performed in **ANSYS Fluent**:
+
+- incompressible flow  
+- 2D statistically steady channel  
+- wall BCs  
+- symmetry at mid-plane  
+- normalized velocity and coordinates using $u_\tau$ and $h$
+
+Validation steps:
+- residual convergence  
+- shear-stress integral convergence  
+- check for fully developed region  
 
 Extracted quantities:
-	•	mean velocity
-	•	Reynolds stresses
-	•	turbulent viscosity
-	•	$k$, $\varepsilon$, $P$
+- mean velocity  
+- Reynolds stresses  
+- turbulent viscosity  
+- $k$, $\varepsilon$, $P$
 
-⸻
+---
 
-📊 DNS vs RANS Comparison
+## 📊 DNS vs RANS Comparison
 
-Key findings
-	•	Velocity profile: good agreement in log region
-	•	Near-wall region: k–ε overpredicts viscosity → flattening of profile
-	•	Turbulent viscosity: large deviations for $y^+ < 30$
-	•	Production/dissipation peaks: shifted relative to DNS
-	•	DNS captures structures absent in RANS due to averaging
+Key observations:
 
-⸻
+- RANS matches DNS velocity profile fairly well in the logarithmic region  
+- Near-wall discrepancies due to k–ε limitations  
+- Turbulent viscosity differs significantly at low $y^+$  
+- Production and dissipation peak location differ between models  
+- DNS captures near-wall structures that RANS cannot resolve
 
-🧰 Repository Structure
+---
+
+## 🧰 Repository Structure
