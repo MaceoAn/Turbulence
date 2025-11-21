@@ -75,6 +75,8 @@ Using the dataset `LM_Channel_5200_prof.txt`, we compute:
   $$ P = - \overline{u'_x u'_y} \frac{\partial \bar{u}}{\partial y} $$
 - **Dissipation**:  
   $$ \varepsilon = 2\nu S'_{ij} S'_{ij} $$
+<img width="706" height="396" alt="Capture d’écran 2025-11-21 à 12 52 06" src="https://github.com/user-attachments/assets/0d2ec3e7-83fa-4f78-a103-9cbdde9ce616" />
+
 
 ### 🛠️ RANS Simulation (k–ε)
 
