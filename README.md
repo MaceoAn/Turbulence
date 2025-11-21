@@ -67,14 +67,15 @@ $$ \nu_t = C_\mu \frac{k^2}{\varepsilon} $$
 ### 🧪 DNS Analysis
 
 Using the dataset `LM_Channel_5200_prof.txt`, we compute:
-
+\begin{itemize}
 - **Friction velocity**: $u_\tau = 0.78 \,\text{m/s}$  
 - **Velocity profile**: follows log-law  
-  $$ \frac{\bar{u}}{u_\tau} = \frac{1}{\kappa} \ln\left( \frac{y}{l_\tau} \right) + B $$
-- **Turbulence production**:  
-  $$ P = - \overline{u'_x u'_y} \frac{\partial \bar{u}}{\partial y} $$
-- **Dissipation**:  
-  $$ \varepsilon = 2\nu S'_{ij} S'_{ij} $$
+  $\frac{\bar{u}}{u_\tau} = \frac{1}{\kappa} \ln\left( \frac{y}{l_\tau} \right) + B$
+- **Turbulence production**: 
+  $P = - \overline{u'_x u'_y} \frac{\partial \bar{u}}{\partial y}$
+- **Dissipation**:
+  $\epsilon = 2\nu S'_{ij} S'_{ij}$
+
 <img width="706" height="396" alt="Capture d’écran 2025-11-21 à 12 52 06" src="https://github.com/user-attachments/assets/0d2ec3e7-83fa-4f78-a103-9cbdde9ce616" />
 
 
